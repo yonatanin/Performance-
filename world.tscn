@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkgxjohnjo45j"]
+[gd_scene load_steps=8 format=3 uid="uid://bkgxjohnjo45j"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_veepx"]
 [ext_resource type="Texture2D" uid="uid://cbde4trj1y3kr" path="res://icon.svg" id="2_w6ulx"]
+[ext_resource type="PackedScene" uid="uid://hblc53o58ua5" path="res://Player.tscn" id="3_nomtg"]
+[ext_resource type="Texture2D" uid="uid://clwpo83yorvtm" path="res://enemy.png" id="4_a68qm"]
+[ext_resource type="PackedScene" uid="uid://c7f2c5dc7j53h" path="res://Enemy.tscn" id="5_gilfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7foku"]
 size = Vector2(134, 134)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjevj"]
+radius = 60.0
 
 [node name="World" type="Node2D"]
 
@@ -13,9 +19,25 @@ position = Vector2(0, 1)
 script = ExtResource("1_veepx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-4, 5)
+position = Vector2(133, 146)
 texture = ExtResource("2_w6ulx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-3, 4)
+position = Vector2(133, 148)
 shape = SubResource("RectangleShape2D_7foku")
+
+[node name="Player" parent="Player" instance=ExtResource("3_nomtg")]
+
+[node name="Enemy" type="RigidBody2D" parent="."]
+gravity_scale = 2.66454e-15
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+position = Vector2(377, 266)
+scale = Vector2(0.30375, 0.2775)
+texture = ExtResource("4_a68qm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(386, 269)
+shape = SubResource("CircleShape2D_fjevj")
+
+[node name="Enemy" parent="Enemy" instance=ExtResource("5_gilfr")]
